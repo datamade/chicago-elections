@@ -3,18 +3,10 @@ from BeautifulSoup import BeautifulSoup
 import requests
 import json
 
-class PostCache(scrapelib.Scraper) :
-    def key_for_request(self, method, url, **kwargs):
-        if method == 'get':
-            return requests.Request(url=url,
-                                    params=kwargs.get('params', {})).prepare().url
-        if method == 'post' :
-            return requests.Request(url=url,
-                                    params=kwargs.get('data', {})).prepare().url
-            
-
-s = PostCache(requests_per_minute=10,
-              follow_robots=True)
+s = scrapelib.Scraper(requests_per_minute=60,
+                      follow_robots=True,
+                      raise_errors=False,
+                      retry_attempts=10)
 s.cache_storage = scrapelib.cache.FileCache('cache')
 s.cache_write_only = False
 
@@ -43,7 +35,7 @@ for election in selectOptions(s.urlopen(main_url)) :
         soup = BeautifulSoup(resp)
         precinct_pages = []
         for link in soup.findAll('a') :
-            precinct_pages.append('http://www.chicagoelections.com' 
+            precinct_pages.append('http://www.chicagoelections.com/' 
                                   + link['href'])
 
         election_dictionary[election.strip()][race.strip()] = precinct_pages
