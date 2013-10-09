@@ -1,6 +1,5 @@
 import scrapelib
 from BeautifulSoup import BeautifulSoup
-import requests
 import json
 
 s = scrapelib.Scraper(requests_per_minute=60,

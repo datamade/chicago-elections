@@ -25,8 +25,8 @@ c.execute('''CREATE TABLE IF NOT EXISTS result
 
 s = scrapelib.Scraper(requests_per_minute=60,
                       follow_robots=True,
-                      raise_errors=True,
-                      retry_attempts=10)
+                      raise_errors=False,
+                      retry_attempts=0)
 s.cache_storage = scrapelib.cache.FileCache('cache')
 s.cache_write_only = False
 
@@ -65,7 +65,12 @@ for election, races in precinct_pages.items() :
             soup = BeautifulSoup(s.urlopen(page))
             results_table = soup.find('table')
             table = parseTable(results_table) 
-            header = table.next()[1:]
+            try: 
+                header = table.next()[1:]
+            except AttributeError :
+                continue #logging
+
+
             for results in table :
                 try :
                     precinct = results.pop(0)
