@@ -12,16 +12,19 @@ c = conn.cursor()
 #c.execute("DROP TABLE IF EXISTS race")
 #c.execute("DROP TABLE IF EXISTS result")
 
-c.execute('''CREATE TABLE IF NOT EXISTS election
-             (election_id integer PRIMARY KEY, name TEXT)
+c.execute('''CREATE TABLE IF NOT EXISTS election (
+                election_id integer PRIMARY KEY, name TEXT)
           ''')
 c.execute('''CREATE TABLE IF NOT EXISTS race 
              (race_id integer PRIMARY KEY, election_id integer, name TEXT)
           ''')
 c.execute('''CREATE TABLE IF NOT EXISTS result 
-             (result_id integer PRIMARY KEY, 
-              race_id integer, option TEXT, ward INTEGER, 
-              precinct INTEGER, votes INTEGER)
+             (race_id integer, 
+              option TEXT, 
+              ward INTEGER, 
+              precinct INTEGER, 
+              votes INTEGER, 
+              PRIMARY KEY (race_id, option, ward, precinct))
           ''')
 
 s = scrapelib.Scraper(requests_per_minute=60,

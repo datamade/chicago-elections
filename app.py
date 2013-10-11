@@ -6,13 +6,14 @@ from operator import attrgetter
 from itertools import groupby
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///results.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///election_results.db'
 
 db = SQLAlchemy(app)
 
 class Election(db.Model):
     election_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True)
+    date = db.Column(db.Date, index=True)
     races = db.relationship('Race', backref='election', lazy='dynamic')
 
     def __repr__(self):
@@ -23,8 +24,8 @@ class Election(db.Model):
 
 class Race(db.Model):
     race_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), index=True)
     election_id = db.Column(db.Integer, db.ForeignKey('election.election_id'), index=True)
+    name = db.Column(db.String(255), index=True)
     results = db.relationship('Result', backref='race', lazy='dynamic')
 
     def __repr__(self):
