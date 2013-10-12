@@ -4,28 +4,11 @@ import json
 import sqlite3
 import re
 from urlparse import urlparse, parse_qs
+from app import db, Result, Race, Election, BallotsCast, Voters
+import csv
+from datetime import date
 
-conn = sqlite3.connect('results.db', timeout=10)
-c = conn.cursor()
-
-#c.execute("DROP TABLE IF EXISTS election")
-#c.execute("DROP TABLE IF EXISTS race")
-#c.execute("DROP TABLE IF EXISTS result")
-
-c.execute('''CREATE TABLE IF NOT EXISTS election (
-                election_id integer PRIMARY KEY, name TEXT)
-          ''')
-c.execute('''CREATE TABLE IF NOT EXISTS race 
-             (race_id integer PRIMARY KEY, election_id integer, name TEXT)
-          ''')
-c.execute('''CREATE TABLE IF NOT EXISTS result 
-             (race_id integer, 
-              option TEXT, 
-              ward INTEGER, 
-              precinct INTEGER, 
-              votes INTEGER, 
-              PRIMARY KEY (race_id, option, ward, precinct))
-          ''')
+db.create_all()
 
 s = scrapelib.Scraper(requests_per_minute=60,
                       follow_robots=True,
@@ -50,54 +33,81 @@ def parseTable(results_table) :
         else:
             yield row_list
 
+def get_or_create(model, **kwargs):
+    instance = db.session.query(model).filter_by(**kwargs).first()
+    if instance:
+        return instance, False
+    else:
+        instance = model(**kwargs)
+        db.session.add(instance)
+        db.session.commit()
+        return instance, True
 
+elex_dates = {}
+with open('election_dates.csv', 'rb') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        year, month, day = row['Date'].split('-')
+        elex_dates[row['Election']] = date(int(year), int(month), int(day))
 
-for election, races in precinct_pages.items() :
-    c.execute("SELECT election_id FROM election WHERE name = ?", 
-              (election,))
-    result = c.fetchone()
-    if result :
-        election_id = result[0]
-    else :
-        c.execute("INSERT INTO election (name) VALUES (?)", (election,))
-        election_id = c.lastrowid
-    for race, pages in races.items():
-        c.execute("SELECT race_id from race WHERE name = ? AND election_id = ?", (race, election_id))
-        race_id = c.fetchone()
-        if race_id:
-            race_id = race_id[0]
-        else:
-            c.execute("INSERT INTO race (election_id, name) VALUES (?, ?)", 
-                      (election_id, race))
-            race_id = c.lastrowid
-        for page in pages :
-            print page
-            ward = parse_qs(urlparse(page).query)['Ward'][0]
-            c.execute('select result_id from result where race_id = ? and ward = ?', (race_id, ward))
-            result_rows = c.fetchone()
-            if result_rows:
-                continue
-            soup = BeautifulSoup(s.urlopen(page))
-            results_table = soup.find('table')
-            table = parseTable(results_table) 
-            try: 
-                header = table.next()
-                header = header[1:]
-            except AttributeError :
-                continue #logging
+def get_race_tables(pages):
+    for page in pages :
+        print page
+        ward = parse_qs(urlparse(page).query)['Ward'][0]
+        soup = BeautifulSoup(s.urlopen(page))
+        results_table = soup.find('table')
+        table = parseTable(results_table) 
+        try: 
+            header = table.next()
+            header = header[1:]
+            yield ward, header, table
+        except AttributeError :
+            continue #logging
 
-
+for election, races in precinct_pages.items():
+    date = elex_dates[election]
+    election, created = get_or_create(Election, name=election, date=date)
+    for race_name, pages in races.items():
+        # Might want to fork here since the ballots cast and registered voters
+        # tables are not really races, per se. 
+        ballots_cast = False
+        voters = False
+        race = None
+        race_data = {
+            'name': race_name,
+            'election_id': election.election_id
+        }
+        if 'ballots' in race_name.lower():
+            ballots_cast = True
+        if 'registered' in race_name.lower():
+            voters = True
+        if not ballots_cast and not voters:
+            race, created = get_or_create(Race, **race_data)
+        for ward, header, table in get_race_tables(pages):
             for results in table :
                 try :
                     precinct = results.pop(0)
                     int(precinct) # if we can't cast this to int then raise error
-                    for result in zip(header, results):
-                        c.execute("INSERT INTO result (race_id, ward, precinct, option, votes) VALUES (?, ?, ?, ?, ?)",
-                                  [race_id] + [ward] + [precinct] + list(result))
-
+                    data = {
+                        'ward': ward,
+                        'precinct': precinct,
+                    }
+                    if len(results) < 2:
+                        data['name'] = race_data['name']
+                        data['election_id'] = race_data['election_id']
+                        if ballots_cast:
+                            data['votes'] = results[0]
+                            db.session.add(BallotsCast(**data))
+                        elif voters:
+                            data['count'] = results[0]
+                            db.session.add(Voters(**data))
+                        db.session.commit()
+                    else:
+                        for option,votes in zip(header, results):
+                            data['option'] = option
+                            data['votes'] = votes
+                            data['race'] = race
+                            db.session.add(Result(**data))
+                            db.session.commit()
                 except ValueError, e:
-                    print e
                     continue
-            conn.commit()
-
-conn.close()

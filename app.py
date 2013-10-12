@@ -4,17 +4,22 @@ from sqlalchemy import func
 import json
 from operator import attrgetter
 from itertools import groupby
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///election_results.db'
+CONN_STRING = os.environ['ELECTIONS_CONN']
+app.config['SQLALCHEMY_DATABASE_URI'] = CONN_STRING
 
 db = SQLAlchemy(app)
 
 class Election(db.Model):
+    __tablename__ = 'election'
     election_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True)
     date = db.Column(db.Date, index=True)
     races = db.relationship('Race', backref='election', lazy='dynamic')
+    ballots_cast = db.relationship('BallotsCast', backref='election', lazy='dynamic')
+    voters = db.relationship('Voters', backref='election', lazy='dynamic')
 
     def __repr__(self):
         return '<Election %r>' % self.name
@@ -22,7 +27,38 @@ class Election(db.Model):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+class BallotsCast(db.Model):
+    __tablename__ = 'ballots_cast'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, index=True)
+    ward = db.Column(db.Integer, index=True)
+    precinct = db.Column(db.Integer, index=True)
+    votes = db.Column(db.Integer)
+    election_id = db.Column(db.Integer, db.ForeignKey('election.election_id'), index=True)
+
+    def __repr__(self):
+        return '<BallotsCast Election: %s, Ward: %r, Precinct: %s>' % (self.election.name, self.ward, self.precinct)
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+class Voters(db.Model):
+    __tablename__ = 'voters'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, index=True)
+    ward = db.Column(db.Integer, index=True)
+    precinct = db.Column(db.Integer, index=True)
+    count = db.Column(db.Integer)
+    election_id = db.Column(db.Integer, db.ForeignKey('election.election_id'), index=True)
+
+    def __repr__(self):
+        return '<Voters (%r) Election: %s, Ward: %r, Precinct: %s>' % (self.name, self.election.name, self.ward, self.precinct)
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 class Race(db.Model):
+    __tablename__ = 'race'
     race_id = db.Column(db.Integer, primary_key=True)
     election_id = db.Column(db.Integer, db.ForeignKey('election.election_id'), index=True)
     name = db.Column(db.String(255), index=True)
@@ -35,6 +71,7 @@ class Race(db.Model):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Result(db.Model):
+    __tablename__ = 'result'
     result_id = db.Column(db.Integer, primary_key=True)
     option = db.Column(db.String(255), index=True)
     ward = db.Column(db.Integer, index=True)
