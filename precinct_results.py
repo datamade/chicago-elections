@@ -4,7 +4,7 @@ import json
 import sqlite3
 import re
 from urlparse import urlparse, parse_qs
-from app import db, Result, Race, Election, BallotsCast, Voters
+from app import db, Result, Election, BallotsCast, Voters
 import csv
 from datetime import date
 
@@ -72,42 +72,38 @@ for election, races in precinct_pages.items():
         # tables are not really races, per se. 
         ballots_cast = False
         voters = False
-        race = None
-        race_data = {
-            'name': race_name,
-            'election_id': election.election_id
+        data = {
+            'race_name': race_name,
+            'election_id': election.id
         }
         if 'ballots' in race_name.lower():
             ballots_cast = True
         if 'registered' in race_name.lower():
             voters = True
-        if not ballots_cast and not voters:
-            race, created = get_or_create(Race, **race_data)
         for ward, header, table in get_race_tables(pages):
-            for results in table :
+            for results in table:
                 try :
                     precinct = results.pop(0)
                     int(precinct) # if we can't cast this to int then raise error
-                    data = {
-                        'ward': ward,
-                        'precinct': precinct,
-                    }
+                    data['ward'] = ward
+                    data['precinct'] = precinct
                     if len(results) < 2:
-                        data['name'] = race_data['name']
-                        data['election_id'] = race_data['election_id']
                         if ballots_cast:
                             data['votes'] = results[0]
-                            db.session.add(BallotsCast(**data))
+                            bc, created = get_or_create(BallotsCast, **data)
+                            if created:
+                                print 'Created: %s' % bc
                         elif voters:
                             data['count'] = results[0]
-                            db.session.add(Voters(**data))
-                        db.session.commit()
+                            v, created = get_or_create(Voters, **data)
+                            if created:
+                                print 'Created: %s' % v
                     else:
                         for option,votes in zip(header, results):
                             data['option'] = option
                             data['votes'] = votes
-                            data['race'] = race
-                            db.session.add(Result(**data))
-                            db.session.commit()
+                            r, created = get_or_create(Result, **data)
+                            if created:
+                                print 'Created %s' % r
                 except ValueError, e:
                     continue
