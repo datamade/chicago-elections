@@ -18,6 +18,7 @@ class Election(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True)
     date = db.Column(db.Date, index=True)
+    election_type = db.Column(db.String(255), index=True)
     ballots_cast = db.relationship('BallotsCast', backref='election', lazy='dynamic')
     voters = db.relationship('Voters', backref='election', lazy='dynamic')
     results = db.relationship('Result', backref='election', lazy='dynamic')
