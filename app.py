@@ -101,7 +101,7 @@ def ballots():
     return resp
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=9999)
 
 # Return number of votes cast for a given option in a given race
 # it = db.session.query(Result, func.sum(Result.votes)).filter(Result.race_id==race.race_id).group_by(Result.option)
