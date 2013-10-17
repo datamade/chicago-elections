@@ -95,7 +95,7 @@ def ballots_by_id(election_id):
     if not election:
         r = {
             'status': 'error',
-            'message': 'No election with id "%s" found' % election
+            'message': 'No election with id "%s" found' % election_id
         }
         resp = make_response(json.dumps(r))
     else:
@@ -114,7 +114,7 @@ def elections_by_id(election_id):
     if not election:
         r = {
             'status': 'error',
-            'message': 'No election with id "%s" found' % election
+            'message': 'No election with id "%s" found' % election_id
         }
         resp = make_response(json.dumps(r))
     else:
