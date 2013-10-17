@@ -52,7 +52,7 @@ with open('election_dates.csv', 'rb') as f:
         elex_dates[row['Election']] = date(int(year), int(month), int(day))
 
 def get_race_tables(pages):
-    already_loaded = [c.split(',')[2] for c in os.listdir('cache')]
+    already_loaded = list(open('cached.txt', 'rb'))
     for page in pages :
         if urlparse(page).query in already_loaded:
             continue
