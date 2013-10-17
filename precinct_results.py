@@ -53,8 +53,9 @@ with open('election_dates.csv', 'rb') as f:
 
 def get_race_tables(pages):
     already_loaded = list(open('cached.txt', 'rb'))
-    for page in pages :
-        if urlparse(page).query in already_loaded:
+    for page in pages:
+        stupid_query = '%s\n' % urlparse(page).query
+        if stupid_query in already_loaded:
             continue
         print page
         ward = parse_qs(urlparse(page).query)['Ward'][0]

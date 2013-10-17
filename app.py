@@ -89,41 +89,62 @@ def aggregate_by_ward(election, relation, attr):
         relation_by_ward.append({'ward': ward, 'count': count})
     return relation_by_ward
 
+@app.route('/ballots/<int:election_id>/')
+def ballots_by_id(election_id):
+    election = Election.query.get(election_id)
+    if not election:
+        r = {
+            'status': 'error',
+            'message': 'No election with id "%s" found' % election
+        }
+        resp = make_response(json.dumps(r))
+    else:
+        ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
+        outp = {
+            'election': election.as_dict(),
+            'ballots_cast': ballots,
+        }
+        resp = make_response(json.dumps(outp, default=dthandler))
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
+
+@app.route('/elections/<int:election_id>/')
+def elections_by_id(election_id):
+    election = Election.query.get(election_id)
+    if not election:
+        r = {
+            'status': 'error',
+            'message': 'No election with id "%s" found' % election
+        }
+        resp = make_response(json.dumps(r))
+    else:
+        ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
+        voters = aggregate_by_ward(election, 'voters', 'count')
+        result = db.session.query(Result.ward, Result.option, 
+            Result.race_name, func.sum(Result.votes)) \
+            .filter(Result.election_id == election.id) \
+            .group_by(Result.ward, Result.race_name, Result.option).all()
+        header = ['ward', 'option', 'race', 'votes']
+        results = []
+        for r in result:
+            res = {}
+            for k,v in zip(header, r):
+                res[k] = v
+            results.append(res)
+        outp = {
+            'election': election.as_dict(),
+            'ballots_cast': ballots,
+            'voters': voters,
+            'results': results
+        }
+        resp = make_response(json.dumps(outp, default=dthandler))
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
+
 @app.route('/elections/')
 def elections():
-    election = request.args.get('election')
-    if not election:
-        elections_avail = [{'name': e.name, 'id': e.id, 'date': e.date} for e in Election.query.order_by('date').all()]
-        resp = make_response(json.dumps(elections_avail, default=dthandler))
-    else:
-        elex = Election.query.get(int(election))
-        if not election:
-            r = {
-                'status': 'error',
-                'message': 'No election with id "%s" found' % election
-            }
-            resp = make_response(json.dumps(r))
-        else:
-            ballots = aggregate_by_ward(elex, 'ballots_cast', 'votes')
-            voters = aggregate_by_ward(elex, 'voters', 'count')
-            result = db.session.query(Result.ward, Result.option, 
-                Result.race_name, func.sum(Result.votes)) \
-                .filter(Result.election_id == elex.id) \
-                .group_by(Result.ward, Result.race_name, Result.option).all()
-            header = ['ward', 'option', 'race', 'votes']
-            results = []
-            for r in result:
-                res = {}
-                for k,v in zip(header, r):
-                    res[k] = v
-                results.append(res)
-            outp = {
-                'election': elex.as_dict(),
-                'ballots_cast': ballots,
-                'voters': voters,
-                'results': results
-            }
-            resp = make_response(json.dumps(outp, default=dthandler))
+    elections_avail = [{'name': e.name, 'id': e.id, 'date': e.date} for e in Election.query.order_by('date').all()]
+    resp = make_response(json.dumps(elections_avail, default=dthandler))
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
