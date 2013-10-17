@@ -4,6 +4,7 @@ import json
 import sqlite3
 import re
 from urlparse import urlparse, parse_qs
+import os
 from app import db, Result, Election, BallotsCast, Voters
 import csv
 from datetime import date
@@ -51,7 +52,10 @@ with open('election_dates.csv', 'rb') as f:
         elex_dates[row['Election']] = date(int(year), int(month), int(day))
 
 def get_race_tables(pages):
+    already_loaded = [c.split(',')[2] for c in os.listdir('cache')]
     for page in pages :
+        if urlparse(page).query in already_loaded:
+            continue
         print page
         ward = parse_qs(urlparse(page).query)['Ward'][0]
         soup = BeautifulSoup(s.urlopen(page))
