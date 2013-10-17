@@ -77,17 +77,17 @@ class Result(db.Model):
 
 dthandler = lambda obj: obj.isoformat() if isinstance(obj, date) else None
 
-def aggregate_by_ward(election, relation, attr):
-    by_ward = sorted(getattr(election, relation).all(), key=attrgetter('ward'))
-    groups_by_ward = []
-    for k, g in groupby(by_ward, key=attrgetter('ward')):
-        groups_by_ward.append({k:list(g)})
-    relation_by_ward = []
-    for ballot in groups_by_ward:
-        ward = ballot.keys()[0]
-        count = sum([getattr(b, attr) for b in ballot[ward]])
-        relation_by_ward.append({'ward': ward, 'count': count})
-    return relation_by_ward
+def aggregate(election, relation, attr, agg_key):
+    sorted_rel = sorted(getattr(election, relation).all(), key=attrgetter(agg_key))
+    group_by = []
+    for k, g in groupby(sorted_rel, key=attrgetter(agg_key)):
+        group_by.append({k:list(g)})
+    relation_list = []
+    for ballot in group_by:
+        key = ballot.keys()[0]
+        count = sum([getattr(b, attr) for b in ballot[key]])
+        relation_list.append({agg_key: key, 'count': count})
+    return relation_list
 
 @app.route('/ballots/<int:election_id>/')
 def ballots_by_id(election_id):
@@ -99,7 +99,7 @@ def ballots_by_id(election_id):
         }
         resp = make_response(json.dumps(r), 404)
     else:
-        ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
+        ballots = aggregate(election, 'ballots_cast', 'votes', 'ward')
         outp = {
             'election': election.as_dict(),
             'ballots_cast': ballots,
@@ -118,8 +118,8 @@ def elections_by_id(election_id):
         }
         resp = make_response(json.dumps(r), 404)
     else:
-        ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
-        voters = aggregate_by_ward(election, 'voters', 'count')
+        ballots = aggregate(election, 'ballots_cast', 'votes', 'ward')
+        voters = aggregate(election, 'voters', 'count', 'ward')
         result = db.session.query(Result.ward, Result.option, 
             Result.race_name, func.sum(Result.votes)) \
             .filter(Result.election_id == election.id) \
