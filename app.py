@@ -97,7 +97,7 @@ def ballots_by_id(election_id):
             'status': 'error',
             'message': 'No election with id "%s" found' % election_id
         }
-        resp = make_response(json.dumps(r))
+        resp = make_response(json.dumps(r), 404)
     else:
         ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
         outp = {
@@ -116,7 +116,7 @@ def elections_by_id(election_id):
             'status': 'error',
             'message': 'No election with id "%s" found' % election_id
         }
-        resp = make_response(json.dumps(r))
+        resp = make_response(json.dumps(r), 404)
     else:
         ballots = aggregate_by_ward(election, 'ballots_cast', 'votes')
         voters = aggregate_by_ward(election, 'voters', 'count')
