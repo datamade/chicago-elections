@@ -75,27 +75,54 @@ class Result(db.Model):
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-@app.route('/ballots/')
-def ballots():
+dthandler = lambda obj: obj.isoformat() if isinstance(obj, date) else None
+
+def aggregate_by_ward(election, relation, attr):
+    by_ward = sorted(getattr(election, relation).all(), key=attrgetter('ward'))
+    groups_by_ward = []
+    for k, g in groupby(by_ward, key=attrgetter('ward')):
+        groups_by_ward.append({k:list(g)})
+    relation_by_ward = []
+    for ballot in groups_by_ward:
+        ward = ballot.keys()[0]
+        count = sum([getattr(b, attr) for b in ballot[ward]])
+        relation_by_ward.append({'ward': ward, 'count': count})
+    return relation_by_ward
+
+@app.route('/elections/')
+def elections():
     election = request.args.get('election')
     if not election:
-        resp = make_response('{"status": "error", "message": "You must provide the name of an election"}', 400)
+        elections_avail = [{'name': e.name, 'id': e.id, 'date': e.date} for e in Election.query.order_by('date').all()]
+        resp = make_response(json.dumps(elections_avail, default=dthandler))
     else:
-        elex = Election.query.filter_by(name=election).first()
-        if not elex:
-            resp = make_response('{"status": "error", "message": "No election called \'%s\' found"}' % election, 404)
+        elex = Election.query.get(int(election))
+        if not election:
+            r = {
+                'status': 'error',
+                'message': 'No election with id "%s" found' % election
+            }
+            resp = make_response(json.dumps(r))
         else:
-            by_ward = sorted(elex.ballots_cast.all(), key=attrgetter('ward'))
-            groups_by_ward = []
-            for k, g in groupby(by_ward, key=attrgetter('ward')):
-                groups_by_ward.append({k:list(g)})
-            ballots_by_ward = []
-            for ballot in groups_by_ward:
-                ward = ballot.keys()[0]
-                count = sum([b.votes for b in ballot[ward]])
-                ballots_by_ward.append({'ward':ward, 'count': count})
-            outp = {'election': elex.as_dict(), 'ballots_cast': ballots_by_ward}
-            dthandler = lambda obj: obj.isoformat() if isinstance(obj, date) else None
+            ballots = aggregate_by_ward(elex, 'ballots_cast', 'votes')
+            voters = aggregate_by_ward(elex, 'voters', 'count')
+            result = db.session.query(Result.ward, Result.option, 
+                Result.race_name, func.sum(Result.votes)) \
+                .filter(Result.election_id == elex.id) \
+                .group_by(Result.ward, Result.race_name, Result.option).all()
+            header = ['ward', 'option', 'race', 'votes']
+            results = []
+            for r in result:
+                res = {}
+                for k,v in zip(header, r):
+                    res[k] = v
+                results.append(res)
+            outp = {
+                'election': elex.as_dict(),
+                'ballots_cast': ballots,
+                'voters': voters,
+                'results': results
+            }
             resp = make_response(json.dumps(outp, default=dthandler))
     resp.headers['Content-Type'] = 'application/json'
     return resp
