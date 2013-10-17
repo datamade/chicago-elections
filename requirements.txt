@@ -3,3 +3,5 @@ requests==2.0.0
 scrapelib==0.9.0
 Flask==0.10.0
 Flask-SQLAlchemy==1.0
+gunicorn==18.0
+psycopg2==2.5.1
