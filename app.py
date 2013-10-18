@@ -1,5 +1,7 @@
 from flask import Flask, request, make_response
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import cast
+from sqlalchemy import VARCHAR
 from sqlalchemy import func
 import json
 from operator import attrgetter
@@ -77,8 +79,9 @@ class Result(db.Model):
 
 dthandler = lambda obj: obj.isoformat() if isinstance(obj, date) else None
 
-def aggregate(election, relation, attr, agg_key):
-    sorted_rel = sorted(getattr(election, relation).all(), key=attrgetter(agg_key))
+def aggregate(election, relation, attr, agg_key, filters={}):
+    objs = getattr(election, relation).filter_by(**filters).all()
+    sorted_rel = sorted(objs, key=attrgetter(agg_key))
     group_by = []
     for k, g in groupby(sorted_rel, key=attrgetter(agg_key)):
         group_by.append({k:list(g)})
@@ -111,6 +114,8 @@ def ballots_by_id(election_id):
 @app.route('/elections/<int:election_id>/')
 def elections_by_id(election_id):
     election = Election.query.get(election_id)
+    ward_filter = request.args.get('ward')
+    precinct_filter = request.args.get('precinct')
     if not election:
         r = {
             'status': 'error',
@@ -118,15 +123,25 @@ def elections_by_id(election_id):
         }
         resp = make_response(json.dumps(r), 404)
     else:
-        ballots = aggregate(election, 'ballots_cast', 'votes', 'ward')
-        voters = aggregate(election, 'voters', 'count', 'ward')
-        result = db.session.query(Result.ward, Result.option, 
-            Result.race_name, func.sum(Result.votes)) \
+        filters = {}
+        if ward_filter:
+            filters['ward'] = ward_filter
+        if precinct_filter:
+            filters['precinct'] = precinct_filter
+        ballots = aggregate(election, 'ballots_cast', 'votes', 'ward', filters=filters)
+        voters = aggregate(election, 'voters', 'count', 'ward', filters=filters)
+        # This query can take a while (5+ seconds) on the larger elections
+        # Perhaps a better approach is needed. 
+        query = db.session.query(Result.ward, Result.option, 
+            Result.race_name, func.sum(Result.votes), 
+            func.string_agg(cast(Result.precinct, VARCHAR), ',')) \
             .filter(Result.election_id == election.id) \
+            .filter_by(**filters) \
             .group_by(Result.ward, Result.race_name, Result.option).all()
-        header = ['ward', 'option', 'race', 'votes']
+        db.session.close()
+        header = ['ward', 'option', 'race', 'votes', 'precincts']
         results = []
-        for r in result:
+        for r in query:
             res = {}
             for k,v in zip(header, r):
                 res[k] = v
