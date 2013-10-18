@@ -134,12 +134,12 @@ def elections_by_id(election_id):
         # Perhaps a better approach is needed. 
         query = db.session.query(Result.ward, Result.option, 
             Result.race_name, func.sum(Result.votes), 
-            func.string_agg(cast(Result.precinct, VARCHAR), ',')) \
+            func.count(Result.precinct)) \
             .filter(Result.election_id == election.id) \
             .filter_by(**filters) \
             .group_by(Result.ward, Result.race_name, Result.option).all()
         db.session.close()
-        header = ['ward', 'option', 'race', 'votes', 'precincts']
+        header = ['ward', 'option', 'race', 'votes', 'precinct_count']
         results = []
         for r in query:
             res = {}
