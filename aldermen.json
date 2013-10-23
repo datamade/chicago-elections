@@ -1,0 +1,12 @@
+[
+  { "name": "Edward M. Burke",
+    "ward": 14, 
+    "tenure_years": 14,
+    "committees": [
+        {"name": "Committee on Aviation"},
+        {"name": "Committee on Finance"}
+    ],
+    "is_ward_committeeman": 1,
+    "democratic_party_office": ""
+  }
+]

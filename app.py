@@ -163,6 +163,12 @@ def elections():
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
+@app.route('/aldermen/')
+def aldermen():
+    resp = make_response(open('aldermen.json').read())
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
+
 @app.route('/elections/latest-primary/')
 def elections_latest():
     resp = make_response(open('latest-primary.json').read())
