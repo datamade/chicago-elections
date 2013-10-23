@@ -1,1 +1,18 @@
-[{}]
+[
+  {"candidate" : "Edward M. Burke",
+    "active committees" : [
+        {
+          "name" : "14th Ward Regular Democratic Org",
+          "current funds" : 891778.79,
+          "last cycle receipts" : 10000.00,
+          "last cycle expenditure" : 10000.00
+        },
+        {
+          "name" : "Friends of Edward M Burke",
+          "current funds" : 4692892.85,
+          "last cycle receipts" : 100000.00,
+          "last cycle expenditure" : 100000.00
+        }
+    ] 
+  }
+]
