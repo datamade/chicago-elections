@@ -163,6 +163,18 @@ def elections():
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
+@app.route('/war-chest/')
+def war_chest():
+    resp = make_response(open('war-chest.json').read())
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
+
+@app.route('/clout/')
+def clout():
+    resp = make_response(open('clout.json').read())
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
+
 @app.route('/aldermen/')
 def aldermen():
     resp = make_response(open('aldermen.json').read())
