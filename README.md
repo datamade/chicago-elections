@@ -17,6 +17,17 @@ this should be as simple as:
 $ pip install -e git+git@github.com:datamade/chicago-elections.git#egg=chicago_elections
 ```
 
+Once that’s there, you’ll need to add ``chicago_elections`` to the installed apps in your 
+Anthropod setup and add to the ``urlpatterns`` within Anthropod’s the main ``urls.py``
+
+``` python
+urlpatterns = patterns('',
+    ...
+    url(r'^elections/', include('chicago_elections.urls')),
+    ...
+)
+```
+
 ##### Loading data
 
 This app gives you one additional management command that scrapes all of the 
