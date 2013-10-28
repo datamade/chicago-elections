@@ -1,1 +1,252 @@
-[{"alderman":"Moreno, Proco Joe","clout":-0.291973596315793},{"alderman":"Pope, John","clout":-0.0290353880399874},{"alderman":"Balcer, James","clout":3.21437769999716},{"alderman":"Cardenas, George A.","clout":1.42955352186218},{"alderman":"Quinn, Marty","clout":1.32008178883171},{"alderman":"Burke, Edward M.","clout":17.5821403068751},{"alderman":"Foulkes, Toni","clout":-0.663531489811992},{"alderman":"Thompson, Joann","clout":-0.778688348977922},{"alderman":"Thomas, Latasha R.","clout":2.68476907751152},{"alderman":"Lane, Lona","clout":0.683525111619548},{"alderman":"O'Shea, Matthew J.","clout":2.25992969671198},{"alderman":"Fioretti, Bob","clout":0.382476647611872},{"alderman":"Cochran, Willie","clout":-0.370541251777842},{"alderman":"Brookins, Jr., Howard","clout":1.29086214475562},{"alderman":"Munoz, Ricardo","clout":1.01279043073358},{"alderman":"Zalewski, Michael R.","clout":4.26169072009095},{"alderman":"Chandler, Michael D.","clout":0.584457373378515},{"alderman":"Solis, Daniel","clout":2.76001053520837},{"alderman":"Maldonado, Roberto","clout":-0.669511327503448},{"alderman":"Burnett, Jr., Walter","clout":3.39141674795676},{"alderman":"Ervin, Jason C.","clout":0.261478369936571},{"alderman":"Graham, Deborah L.","clout":0.607989253572114},{"alderman":"Dowell, Pat","clout":-0.0151743816954798},{"alderman":"Reboyras, Ariel","clout":1.42055689223984},{"alderman":"Suarez, Regner Ray","clout":4.08233030312738},{"alderman":"Waguespack, Scott","clout":-0.545075866451205},{"alderman":"Mell, Deborah","clout":2.11788526492157},{"alderman":"Austin, Carrie M.","clout":4.98594228772447},{"alderman":"Col\u00f3n, Rey","clout":-0.477275463687934},{"alderman":"Sposato, Nicholas","clout":0.701713446122991},{"alderman":"Mitts, Emma","clout":2.45085670733072},{"alderman":"Cullerton, Timothy M.","clout":0.0197689207497488},{"alderman":"Laurino, Margaret","clout":3.25768973727329},{"alderman":"Burns, William D.","clout":1.16084144451632},{"alderman":"O'Connor, Patrick","clout":7.75344637193299},{"alderman":"O'Connor, Mary","clout":0.246783874886751},{"alderman":"Reilly, Brendan","clout":0.161459446556428},{"alderman":"Smith, Michele","clout":-2.36644193952196e-05},{"alderman":"Tunney, Thomas","clout":2.00362025487276},{"alderman":"Arena, John","clout":0.415920511786712},{"alderman":"Cappleman, James","clout":0.0899426318039875},{"alderman":"Pawar, Ameya","clout":0.0278658874098532},{"alderman":"Osterman, Harry","clout":0.459104333973935},{"alderman":"Moore, Joseph","clout":4.63082482243593},{"alderman":"Hairston, Leslie A.","clout":1.06375522342004},{"alderman":"Silverstein, Debra L.","clout":-0.287316037026065},{"alderman":"Sawyer, Roderick T.","clout":1.71503382925236},{"alderman":"Holmes, Natashia","clout":1.34673082536463},{"alderman":"Harris, Michelle A.","clout":3.80369954556901},{"alderman":"Beale, Anthony","clout":3.35504018149807}]
+[
+    {
+        "alderman": "Burke, Edward M.", 
+        "clout": 17.5821403068751, 
+        "rank": 1
+    }, 
+    {
+        "alderman": "O'Connor, Patrick", 
+        "clout": 7.7534463719329896, 
+        "rank": 2
+    }, 
+    {
+        "alderman": "Austin, Carrie M.", 
+        "clout": 4.9859422877244697, 
+        "rank": 3
+    }, 
+    {
+        "alderman": "Moore, Joseph", 
+        "clout": 4.6308248224359296, 
+        "rank": 4
+    }, 
+    {
+        "alderman": "Zalewski, Michael R.", 
+        "clout": 4.2616907200909502, 
+        "rank": 5
+    }, 
+    {
+        "alderman": "Suarez, Regner Ray", 
+        "clout": 4.0823303031273799, 
+        "rank": 6
+    }, 
+    {
+        "alderman": "Harris, Michelle A.", 
+        "clout": 3.8036995455690099, 
+        "rank": 7
+    }, 
+    {
+        "alderman": "Burnett, Jr., Walter", 
+        "clout": 3.3914167479567601, 
+        "rank": 8
+    }, 
+    {
+        "alderman": "Beale, Anthony", 
+        "clout": 3.3550401814980702, 
+        "rank": 9
+    }, 
+    {
+        "alderman": "Laurino, Margaret", 
+        "clout": 3.25768973727329, 
+        "rank": 10
+    }, 
+    {
+        "alderman": "Balcer, James", 
+        "clout": 3.2143776999971601, 
+        "rank": 11
+    }, 
+    {
+        "alderman": "Solis, Daniel", 
+        "clout": 2.7600105352083699, 
+        "rank": 12
+    }, 
+    {
+        "alderman": "Thomas, Latasha R.", 
+        "clout": 2.6847690775115201, 
+        "rank": 13
+    }, 
+    {
+        "alderman": "Mitts, Emma", 
+        "clout": 2.4508567073307201, 
+        "rank": 14
+    }, 
+    {
+        "alderman": "O'Shea, Matthew J.", 
+        "clout": 2.2599296967119802, 
+        "rank": 15
+    }, 
+    {
+        "alderman": "Mell, Deborah", 
+        "clout": 2.1178852649215698, 
+        "rank": 16
+    }, 
+    {
+        "alderman": "Tunney, Thomas", 
+        "clout": 2.00362025487276, 
+        "rank": 17
+    }, 
+    {
+        "alderman": "Sawyer, Roderick T.", 
+        "clout": 1.7150338292523599, 
+        "rank": 18
+    }, 
+    {
+        "alderman": "Cardenas, George A.", 
+        "clout": 1.42955352186218, 
+        "rank": 19
+    }, 
+    {
+        "alderman": "Reboyras, Ariel", 
+        "clout": 1.4205568922398399, 
+        "rank": 20
+    }, 
+    {
+        "alderman": "Holmes, Natashia", 
+        "clout": 1.34673082536463, 
+        "rank": 21
+    }, 
+    {
+        "alderman": "Quinn, Marty", 
+        "clout": 1.32008178883171, 
+        "rank": 22
+    }, 
+    {
+        "alderman": "Brookins, Jr., Howard", 
+        "clout": 1.2908621447556199, 
+        "rank": 23
+    }, 
+    {
+        "alderman": "Burns, William D.", 
+        "clout": 1.16084144451632, 
+        "rank": 24
+    }, 
+    {
+        "alderman": "Hairston, Leslie A.", 
+        "clout": 1.06375522342004, 
+        "rank": 25
+    }, 
+    {
+        "alderman": "Munoz, Ricardo", 
+        "clout": 1.01279043073358, 
+        "rank": 26
+    }, 
+    {
+        "alderman": "Sposato, Nicholas", 
+        "clout": 0.70171344612299102, 
+        "rank": 27
+    }, 
+    {
+        "alderman": "Lane, Lona", 
+        "clout": 0.68352511161954799, 
+        "rank": 28
+    }, 
+    {
+        "alderman": "Graham, Deborah L.", 
+        "clout": 0.60798925357211397, 
+        "rank": 29
+    }, 
+    {
+        "alderman": "Chandler, Michael D.", 
+        "clout": 0.584457373378515, 
+        "rank": 30
+    }, 
+    {
+        "alderman": "Osterman, Harry", 
+        "clout": 0.45910433397393502, 
+        "rank": 31
+    }, 
+    {
+        "alderman": "Arena, John", 
+        "clout": 0.41592051178671202, 
+        "rank": 32
+    }, 
+    {
+        "alderman": "Fioretti, Bob", 
+        "clout": 0.382476647611872, 
+        "rank": 33
+    }, 
+    {
+        "alderman": "Ervin, Jason C.", 
+        "clout": 0.26147836993657098, 
+        "rank": 34
+    }, 
+    {
+        "alderman": "O'Connor, Mary", 
+        "clout": 0.24678387488675099, 
+        "rank": 35
+    }, 
+    {
+        "alderman": "Reilly, Brendan", 
+        "clout": 0.16145944655642799, 
+        "rank": 36
+    }, 
+    {
+        "alderman": "Cappleman, James", 
+        "clout": 0.089942631803987497, 
+        "rank": 37
+    }, 
+    {
+        "alderman": "Pawar, Ameya", 
+        "clout": 0.027865887409853199, 
+        "rank": 38
+    }, 
+    {
+        "alderman": "Cullerton, Timothy M.", 
+        "clout": 0.0197689207497488, 
+        "rank": 39
+    }, 
+    {
+        "alderman": "Smith, Michele", 
+        "clout": -2.3664419395219598e-05, 
+        "rank": 40
+    }, 
+    {
+        "alderman": "Dowell, Pat", 
+        "clout": -0.015174381695479799, 
+        "rank": 41
+    }, 
+    {
+        "alderman": "Pope, John", 
+        "clout": -0.029035388039987401, 
+        "rank": 42
+    }, 
+    {
+        "alderman": "Silverstein, Debra L.", 
+        "clout": -0.28731603702606501, 
+        "rank": 43
+    }, 
+    {
+        "alderman": "Moreno, Proco Joe", 
+        "clout": -0.291973596315793, 
+        "rank": 44
+    }, 
+    {
+        "alderman": "Cochran, Willie", 
+        "clout": -0.37054125177784197, 
+        "rank": 45
+    }, 
+    {
+        "alderman": "Colu00f3n, Rey", 
+        "clout": -0.477275463687934, 
+        "rank": 46
+    }, 
+    {
+        "alderman": "Waguespack, Scott", 
+        "clout": -0.54507586645120498, 
+        "rank": 47
+    }, 
+    {
+        "alderman": "Foulkes, Toni", 
+        "clout": -0.66353148981199195, 
+        "rank": 48
+    }, 
+    {
+        "alderman": "Maldonado, Roberto", 
+        "clout": -0.66951132750344799, 
+        "rank": 49
+    }, 
+    {
+        "alderman": "Thompson, Joann", 
+        "clout": -0.77868834897792205, 
+        "rank": 50
+    }
+]
