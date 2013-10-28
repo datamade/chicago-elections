@@ -1,302 +1,302 @@
 [
     {
         "alderman": "Burke, Edward M.", 
-        "clout": 18.7206537074303, 
+        "clout": 25.1524397263653, 
         "id": "ocd-person/a6785b48-3f6e-11e3-8ca6-22000a971dca", 
         "rank": 1
     }, 
     {
         "alderman": "O'Connor, Patrick", 
-        "clout": 8.19442118603454, 
+        "clout": 12.4892896217711, 
         "id": "ocd-person/946a00b6-3cec-11e3-8a24-22000a971dca", 
         "rank": 2
     }, 
     {
         "alderman": "Austin, Carrie M.", 
-        "clout": 4.92717913500398, 
+        "clout": 9.32382814051476, 
         "id": "ocd-person/946926a0-3cec-11e3-8a24-22000a971dca", 
         "rank": 3
     }, 
     {
         "alderman": "Moore, Joseph", 
-        "clout": 4.74256554285771, 
+        "clout": 8.55832450472674, 
         "id": "ocd-person/94674f56-3cec-11e3-8a24-22000a971dca", 
         "rank": 4
     }, 
     {
         "alderman": "Suarez, Regner Ray", 
-        "clout": 4.22518518037207, 
+        "clout": 8.55761430130899, 
         "id": "ocd-person/94682994-3cec-11e3-8a24-22000a971dca", 
         "rank": 5
     }, 
     {
         "alderman": "Zalewski, Michael R.", 
-        "clout": 4.19868344847343, 
+        "clout": 8.37298338293051, 
         "id": "ocd-person/9469a418-3cec-11e3-8a24-22000a971dca", 
         "rank": 6
     }, 
     {
         "alderman": "Harris, Michelle A.", 
-        "clout": 3.42617744377677, 
+        "clout": 7.75481372753427, 
         "id": "ocd-person/9467cbf2-3cec-11e3-8a24-22000a971dca", 
         "rank": 7
     }, 
     {
         "alderman": "Burnett, Jr., Walter", 
-        "clout": 3.37777704501071, 
+        "clout": 7.63399927492459, 
         "id": "ocd-person/946c2dc8-3cec-11e3-8a24-22000a971dca", 
         "rank": 8
     }, 
     {
-        "alderman": "Beale, Anthony", 
-        "clout": 3.18610767792808, 
-        "id": "ocd-person/946ada68-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Solis, Daniel", 
+        "clout": 6.82970528671445, 
+        "id": "ocd-person/946ce84e-3cec-11e3-8a24-22000a971dca", 
         "rank": 9
     }, 
     {
-        "alderman": "Balcer, James", 
-        "clout": 3.12731122067594, 
-        "id": "ocd-person/9468c840-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "O'Shea, Matthew J.", 
+        "clout": 6.52628674343024, 
+        "id": "ocd-person/9466f114-3cec-11e3-8a24-22000a971dca", 
         "rank": 10
     }, 
     {
-        "alderman": "Solis, Daniel", 
-        "clout": 2.73925563375454, 
-        "id": "ocd-person/946ce84e-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Thomas, Latasha R.", 
+        "clout": 6.33281973044904, 
+        "id": "ocd-person/946847c6-3cec-11e3-8a24-22000a971dca", 
         "rank": 11
     }, 
     {
-        "alderman": "Thomas, Latasha R.", 
-        "clout": 2.52050888123014, 
-        "id": "ocd-person/946847c6-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Mitts, Emma", 
+        "clout": 6.17915971523979, 
+        "id": "ocd-person/a67c3a10-3f6e-11e3-8ca6-22000a971dca", 
         "rank": 12
     }, 
     {
-        "alderman": "Mitts, Emma", 
-        "clout": 2.29986553364196, 
-        "id": "ocd-person/a67c3a10-3f6e-11e3-8ca6-22000a971dca", 
+        "alderman": "Tunney, Thomas", 
+        "clout": 6.08362450942337, 
+        "id": "ocd-person/9467ec4a-3cec-11e3-8a24-22000a971dca", 
         "rank": 13
     }, 
     {
-        "alderman": "O'Shea, Matthew J.", 
-        "clout": 2.0278812237635, 
-        "id": "ocd-person/9466f114-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Beale, Anthony", 
+        "clout": 5.93699844913133, 
+        "id": "ocd-person/946ada68-3cec-11e3-8a24-22000a971dca", 
         "rank": 14
     }, 
     {
-        "alderman": "Tunney, Thomas", 
-        "clout": 1.81848674370486, 
-        "id": "ocd-person/9467ec4a-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Burns, William D.", 
+        "clout": 5.332216413718, 
+        "id": "ocd-person/09e165b0-3f85-11e3-b895-22000a971dca", 
         "rank": 15
     }, 
     {
         "alderman": "Mell, Deborah", 
-        "clout": 1.770244478781, 
+        "clout": 5.2690968177131, 
         "id": "ocd-person/9466d12a-3cec-11e3-8a24-22000a971dca", 
         "rank": 16
     }, 
     {
-        "alderman": "Sawyer, Roderick T.", 
-        "clout": 1.51389537431768, 
-        "id": "ocd-person/946b365c-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Laurino, Margaret", 
+        "clout": 5.23029953885461, 
+        "id": "ocd-person/9469481a-3cec-11e3-8a24-22000a971dca", 
         "rank": 17
     }, 
     {
-        "alderman": "Munoz, Ricardo", 
-        "clout": 1.343977329747, 
-        "id": "ocd-person/946bcfe0-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Reboyras, Ariel", 
+        "clout": 5.21883688976263, 
+        "id": "ocd-person/946c0ca8-3cec-11e3-8a24-22000a971dca", 
         "rank": 18
     }, 
     {
-        "alderman": "Cardenas, George A.", 
-        "clout": 1.25082211214595, 
-        "id": "ocd-person/946c8bc4-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Brookins, Jr., Howard", 
+        "clout": 5.18555137333638, 
+        "id": "ocd-person/9469c362-3cec-11e3-8a24-22000a971dca", 
         "rank": 19
     }, 
     {
-        "alderman": "Reboyras, Ariel", 
-        "clout": 1.2423358295464, 
-        "id": "ocd-person/946c0ca8-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Balcer, James", 
+        "clout": 5.16097208421542, 
+        "id": "ocd-person/9468c840-3cec-11e3-8a24-22000a971dca", 
         "rank": 20
     }, 
     {
-        "alderman": "Brookins, Jr., Howard", 
-        "clout": 1.23684132513581, 
-        "id": "ocd-person/9469c362-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Cardenas, George A.", 
+        "clout": 5.02470564161501, 
+        "id": "ocd-person/946c8bc4-3cec-11e3-8a24-22000a971dca", 
         "rank": 21
     }, 
     {
-        "alderman": "Laurino, Margaret", 
-        "clout": 1.22449417805798, 
-        "id": "ocd-person/9469481a-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Reilly, Brendan", 
+        "clout": 4.87514194308133, 
+        "id": "ocd-person/94676e00-3cec-11e3-8a24-22000a971dca", 
         "rank": 22
     }, 
     {
         "alderman": "Holmes, Natashia", 
-        "clout": 1.1596780250228, 
+        "clout": 4.83756773241722, 
         "id": "ocd-person/9468a810-3cec-11e3-8a24-22000a971dca", 
         "rank": 23
     }, 
     {
-        "alderman": "Hairston, Leslie A.", 
-        "clout": 1.1416423409333, 
-        "id": "ocd-person/94698564-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Sawyer, Roderick T.", 
+        "clout": 4.75298768636139, 
+        "id": "ocd-person/946b365c-3cec-11e3-8a24-22000a971dca", 
         "rank": 24
     }, 
     {
-        "alderman": "Quinn, Marty", 
-        "clout": 1.14134756819762, 
-        "id": "ocd-person/94678cf0-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Munoz, Ricardo", 
+        "clout": 4.7448194763009, 
+        "id": "ocd-person/946bcfe0-3cec-11e3-8a24-22000a971dca", 
         "rank": 25
     }, 
     {
-        "alderman": "Burns, William D.", 
-        "clout": 0.991140366185664, 
-        "id": "ocd-person/09e165b0-3f85-11e3-b895-22000a971dca", 
+        "alderman": "Fioretti, Bob", 
+        "clout": 4.59497836154756, 
+        "id": "ocd-person/d30cec7e-3f81-11e3-9c4b-22000a971dca", 
         "rank": 26
     }, 
     {
-        "alderman": "Lane, Lona", 
-        "clout": 0.599842603277188, 
-        "id": "ocd-person/a6728a4c-3f6e-11e3-8ca6-22000a971dca", 
+        "alderman": "Sposato, Nicholas", 
+        "clout": 4.44571203440532, 
+        "id": "ocd-person/946b17e4-3cec-11e3-8a24-22000a971dca", 
         "rank": 27
     }, 
     {
-        "alderman": "Sposato, Nicholas", 
-        "clout": 0.558057077522182, 
-        "id": "ocd-person/946b17e4-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Lane, Lona", 
+        "clout": 4.35429280247139, 
+        "id": "ocd-person/a6728a4c-3f6e-11e3-8ca6-22000a971dca", 
         "rank": 28
     }, 
     {
-        "alderman": "Graham, Deborah L.", 
-        "clout": 0.476646528548926, 
-        "id": "ocd-person/946a7b9a-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Dowell, Pat", 
+        "clout": 4.11745178164833, 
+        "id": "ocd-person/946c6d38-3cec-11e3-8a24-22000a971dca", 
         "rank": 29
     }, 
     {
-        "alderman": "Chandler, Michael D.", 
-        "clout": 0.447452527641436, 
-        "id": "ocd-person/946cc828-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Osterman, Harry", 
+        "clout": 4.08142495815856, 
+        "id": "ocd-person/946bee80-3cec-11e3-8a24-22000a971dca", 
         "rank": 30
     }, 
     {
-        "alderman": "Osterman, Harry", 
-        "clout": 0.329210323421099, 
-        "id": "ocd-person/946bee80-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Pope, John", 
+        "clout": 4.04409623029904, 
+        "id": "ocd-person/946b7356-3cec-11e3-8a24-22000a971dca", 
         "rank": 31
     }, 
     {
-        "alderman": "Fioretti, Bob", 
-        "clout": 0.2992917163941, 
-        "id": "ocd-person/d30cec7e-3f81-11e3-9c4b-22000a971dca", 
+        "alderman": "Cappleman, James", 
+        "clout": 3.96861343377806, 
+        "id": "ocd-person/9469e1b2-3cec-11e3-8a24-22000a971dca", 
         "rank": 32
     }, 
     {
-        "alderman": "Arena, John", 
-        "clout": 0.28847616694328, 
-        "id": "ocd-person/9467ad66-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Chandler, Michael D.", 
+        "clout": 3.93330402620821, 
+        "id": "ocd-person/946cc828-3cec-11e3-8a24-22000a971dca", 
         "rank": 33
     }, 
     {
-        "alderman": "Ervin, Jason C.", 
-        "clout": 0.142794982317745, 
-        "id": "ocd-person/946888e4-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Hairston, Leslie A.", 
+        "clout": 3.85098234817937, 
+        "id": "ocd-person/94698564-3cec-11e3-8a24-22000a971dca", 
         "rank": 34
     }, 
     {
-        "alderman": "O'Connor, Mary", 
-        "clout": 0.12893405407182, 
-        "id": "ocd-person/946868c8-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Graham, Deborah L.", 
+        "clout": 3.78817338588178, 
+        "id": "ocd-person/946a7b9a-3cec-11e3-8a24-22000a971dca", 
         "rank": 35
     }, 
     {
-        "alderman": "Pope, John", 
-        "clout": 0.110841881175149, 
-        "id": "ocd-person/946b7356-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Ervin, Jason C.", 
+        "clout": 3.76974746494195, 
+        "id": "ocd-person/946888e4-3cec-11e3-8a24-22000a971dca", 
         "rank": 36
     }, 
     {
-        "alderman": "Reilly, Brendan", 
-        "clout": 0.0908120405319268, 
-        "id": "ocd-person/94676e00-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Silverstein, Debra L.", 
+        "clout": 3.7232664748019, 
+        "id": "ocd-person/946a1f1a-3cec-11e3-8a24-22000a971dca", 
         "rank": 37
     }, 
     {
-        "alderman": "Cappleman, James", 
-        "clout": -0.0190101392469262, 
-        "id": "ocd-person/9469e1b2-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "O'Connor, Mary", 
+        "clout": 3.72319874989499, 
+        "id": "ocd-person/946868c8-3cec-11e3-8a24-22000a971dca", 
         "rank": 38
     }, 
     {
-        "alderman": "Dowell, Pat", 
-        "clout": -0.0758019745058204, 
-        "id": "ocd-person/946c6d38-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Pawar, Ameya", 
+        "clout": 3.71831584254547, 
+        "id": "ocd-person/94672ecc-3cec-11e3-8a24-22000a971dca", 
         "rank": 39
     }, 
     {
-        "alderman": "Pawar, Ameya", 
-        "clout": -0.0775654891837917, 
-        "id": "ocd-person/94672ecc-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Smith, Michele", 
+        "clout": 3.62164642761843, 
+        "id": "ocd-person/946c4e7a-3cec-11e3-8a24-22000a971dca", 
         "rank": 40
     }, 
     {
-        "alderman": "Cullerton, Timothy M.", 
-        "clout": -0.0852031435233828, 
-        "id": "ocd-person/946af976-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Cochran, Willie", 
+        "clout": 3.49973843543328, 
+        "id": "ocd-person/946a3e32-3cec-11e3-8a24-22000a971dca", 
         "rank": 41
     }, 
     {
-        "alderman": "Smith, Michele", 
-        "clout": -0.103872965242383, 
-        "id": "ocd-person/946c4e7a-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Quinn, Marty", 
+        "clout": 3.47867285146821, 
+        "id": "ocd-person/94678cf0-3cec-11e3-8a24-22000a971dca", 
         "rank": 42
     }, 
     {
         "alderman": "Moreno, Proco Joe", 
-        "clout": -0.372264607492296, 
+        "clout": 3.33624093349089, 
         "id": "ocd-person/09dd6654-3f85-11e3-b895-22000a971dca", 
         "rank": 43
     }, 
     {
-        "alderman": "Silverstein, Debra L.", 
-        "clout": -0.374868256254543, 
-        "id": "ocd-person/946a1f1a-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Cullerton, Timothy M.", 
+        "clout": 3.30009599231831, 
+        "id": "ocd-person/946af976-3cec-11e3-8a24-22000a971dca", 
         "rank": 44
     }, 
     {
-        "alderman": "Cochran, Willie", 
-        "clout": -0.411010137187876, 
-        "id": "ocd-person/946a3e32-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Arena, John", 
+        "clout": 3.24510299862615, 
+        "id": "ocd-person/9467ad66-3cec-11e3-8a24-22000a971dca", 
         "rank": 45
     }, 
     {
         "alderman": "Col\u00f3n, Rey", 
-        "clout": -0.430996081761575, 
+        "clout": 3.02581106912176, 
         "id": "ocd-person/946bb0e6-3cec-11e3-8a24-22000a971dca", 
         "rank": 46
     }, 
     {
-        "alderman": "Waguespack, Scott", 
-        "clout": -0.575644019619062, 
-        "id": "ocd-person/94670fdc-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Maldonado, Roberto", 
+        "clout": 2.9674798907867, 
+        "id": "ocd-person/94680ae0-3cec-11e3-8a24-22000a971dca", 
         "rank": 47
     }, 
     {
-        "alderman": "Foulkes, Toni", 
-        "clout": -0.687380073846414, 
-        "id": "ocd-person/94668e40-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Thompson, Joann", 
+        "clout": 2.63218657122296, 
+        "id": "ocd-person/a7d453e2-3d8a-11e3-b572-22000a971dca", 
         "rank": 48
     }, 
     {
-        "alderman": "Maldonado, Roberto", 
-        "clout": -0.718993246025484, 
-        "id": "ocd-person/94680ae0-3cec-11e3-8a24-22000a971dca", 
+        "alderman": "Waguespack, Scott", 
+        "clout": 2.39572040558104, 
+        "id": "ocd-person/94670fdc-3cec-11e3-8a24-22000a971dca", 
         "rank": 49
     }, 
     {
-        "alderman": "Thompson, Joann", 
-        "clout": -0.796004491120599, 
-        "id": "ocd-person/a7d453e2-3d8a-11e3-b572-22000a971dca", 
+        "alderman": "Foulkes, Toni", 
+        "clout": 2.19612204673766, 
+        "id": "ocd-person/94668e40-3cec-11e3-8a24-22000a971dca", 
         "rank": 50
     }
 ]
