@@ -26,7 +26,7 @@ You will receive a JSON array of object
 Each object contains details about a particular alderman. It has four fields: `alderman`, `clout`, `id`, `rank`.
 
 `alderman` is the name of the alderman. `id` is a unique key that we use for this **person** across APIs. `score` is
-the our predicted "clout score" this is a unitless measurement. 'rank' is the rank of the alderman's clout score with the 
+the our predicted "clout score." This is a unitless measurement. 'rank' is the rank of the alderman's clout score with the 
 highest score having a rank of 1 and the lowest score having a rank of 50.
 
 
