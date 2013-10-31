@@ -1,4 +1,4 @@
-The Clout API retruns information about the clout score and clout ranking of Chicago aldermen.
+The Clout API returns information about the clout score and clout ranking of Chicago aldermen.
 
 To access the Clout API, call http://chicagoelections.datamade.us/clout/
 
