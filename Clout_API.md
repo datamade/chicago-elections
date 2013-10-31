@@ -21,6 +21,7 @@ You will receive a JSON array of object
     },
     ...
 ]
+```
  
 Each object contains details about a particular alderman. It has four fields: `alderman`, `clout`, `id`, `rank`.
 
