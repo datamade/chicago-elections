@@ -16,6 +16,13 @@ s = scrapelib.Scraper(requests_per_minute=60,
 s.cache_storage = scrapelib.cache.FileCache('cache')
 s.cache_write_only = False
 
+elex_dates = {}
+with open('election_dates.csv', 'rb') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        year, month, day = row['Date'].split('-')
+        elex_dates[row['Election']] = date(int(year), int(month), int(day))
+
 def parseTable(results_table) :
     for row in results_table.findAll('tr'):
         row_list = []
@@ -52,63 +59,61 @@ def get_race_tables(pages):
         except AttributeError :
             continue #logging
 
+def load_race(election, race_name, pages):
+    ballots_cast = False
+    voters = False
+    data = {
+        'race_name': race_name,
+        'election_id': election.id
+    }
+    if 'ballots' in race_name.lower():
+        ballots_cast = True
+    if 'registered' in race_name.lower():
+        voters = True
+    for ward, header, table in get_race_tables(pages):
+        for results in table:
+            try :
+                precinct = results.pop(0)
+                int(precinct) # if we can't cast this to int then raise error
+                data['ward'] = ward
+                data['precinct'] = precinct
+                if len(results) < 2:
+                    if ballots_cast:
+                        data['votes'] = results[0]
+                        bc, created = get_or_create(BallotsCast, **data)
+                        if created:
+                            print 'Created: %s' % bc
+                    elif voters:
+                        data['count'] = results[0]
+                        v, created = get_or_create(Voters, **data)
+                        if created:
+                            print 'Created: %s' % v
+                    else:
+                        if header[0] != 'No Candidate':
+                            data['option'] = header[0]
+                            data['votes'] = results[0]
+                            r, created = get_or_create(Result, **data)
+                            if created:
+                                print 'Created %s' % r
+                else:
+                    for option,votes in zip(header, results):
+                        data['option'] = option
+                        data['votes'] = votes
+                        r, created = get_or_create(Result, **data)
+                        if created:
+                            print 'Created %s' % r
+            except ValueError, e:
+                continue
+
+def load_election(election, races):
+    date = elex_dates[election]
+    election, created = get_or_create(Election, name=election, date=date)
+    for race_name, pages in races.items():
+        load_race(election, race_name, pages)
+
 if __name__ == '__main__':
     db.create_all()
     with open('precinct_pages.json') as infile :
         precinct_pages = json.loads(infile.read())
-    elex_dates = {}
-    with open('election_dates.csv', 'rb') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            year, month, day = row['Date'].split('-')
-            elex_dates[row['Election']] = date(int(year), int(month), int(day))
     for election, races in precinct_pages.items():
-        date = elex_dates[election]
-        election, created = get_or_create(Election, name=election, date=date)
-        for race_name, pages in races.items():
-            # Might want to fork here since the ballots cast and registered voters
-            # tables are not really races, per se. 
-            ballots_cast = False
-            voters = False
-            data = {
-                'race_name': race_name,
-                'election_id': election.id
-            }
-            if 'ballots' in race_name.lower():
-                ballots_cast = True
-            if 'registered' in race_name.lower():
-                voters = True
-            for ward, header, table in get_race_tables(pages):
-                for results in table:
-                    try :
-                        precinct = results.pop(0)
-                        int(precinct) # if we can't cast this to int then raise error
-                        data['ward'] = ward
-                        data['precinct'] = precinct
-                        if len(results) < 2:
-                            if ballots_cast:
-                                data['votes'] = results[0]
-                                bc, created = get_or_create(BallotsCast, **data)
-                                if created:
-                                    print 'Created: %s' % bc
-                            elif voters:
-                                data['count'] = results[0]
-                                v, created = get_or_create(Voters, **data)
-                                if created:
-                                    print 'Created: %s' % v
-                            else:
-                                if header[0] != 'No Candidate':
-                                    data['option'] = header[0]
-                                    data['votes'] = results[0]
-                                    r, created = get_or_create(Result, **data)
-                                    if created:
-                                        print 'Created %s' % r
-                        else:
-                            for option,votes in zip(header, results):
-                                data['option'] = option
-                                data['votes'] = votes
-                                r, created = get_or_create(Result, **data)
-                                if created:
-                                    print 'Created %s' % r
-                    except ValueError, e:
-                        continue
+        load_election(election, races)
