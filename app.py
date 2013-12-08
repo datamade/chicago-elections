@@ -68,7 +68,7 @@ def elections_by_id(election_id):
                 res = {}
                 cand = db.candidate.find_one(result['cand_id'][0])
                 res['votes'] = result['votes']
-                res['voters'] = result['voters']
+                d['registered_voters'] = result['voters']
                 if res['votes'] == winning:
                     res['winner'] = True
                 else:
