@@ -30,16 +30,14 @@ def elections():
 def elections_by_id(election_id):
     # Returns a single election and the results of the contests
     # in that election by ward
-    resp = []
-    for ward in range(1,51):
+    resp = {'contests': [], 'registered_voters': 0, 'ballots_cast': 0}
+    contests = list(db.contest.find({'election_id': election_id}))
+    for contest in contests:
         d = {}
-        d['ward'] = ward
         pipeline = [{
             '$match': {
                 'election_id': election_id, 
-                'ocd_id': {
-                    '$regex': r'ward:%s/precinct' % ward
-                }
+                'contest': contest['_id']
             }}, {
                 '$group': {
                     '_id': '$candidate_slug', 
@@ -49,26 +47,36 @@ def elections_by_id(election_id):
                     'voters': {
                         '$sum': '$registered_voters'
                     },
+                    'ballots_cast': {
+                        '$sum': '$ballots_cast'
+                    },
                     'cand_id': {
                         '$addToSet': '$candidate'
                     },
+                    'juris': {
+                        '$addToSet': '$raw_jurisdiction'
+                    }
                 }
             }
         ]
         results = db['result'].aggregate(pipeline)['result']
+        city_wide = False
         if results:
             d['results'] = []
             votes = [r['votes'] for r in results]
-            d['votes_cast'] = sum(votes)
             winning = max(votes)
+            ballots = max([r['ballots_cast'] for r in results])
             d['election_id'] = election_id
-            d['division'] = 'ocd-division/country:us/state:il/place:chicago'
-            d['office_name'] = 'Alderman Ward %s' % ward
+            d['office'] = contest['office']['name']
+            if 'Chicago, IL' in [r['juris'] for r in results]:
+                city_wide = True
             for result in results:
                 res = {}
                 cand = db.candidate.find_one(result['cand_id'][0])
                 res['votes'] = result['votes']
                 d['registered_voters'] = result['voters']
+                d['ballots_cast'] = result['ballots_cast']
+                d['votes_cast'] = sum(votes)
                 if res['votes'] == winning:
                     res['winner'] = True
                 else:
@@ -77,7 +85,14 @@ def elections_by_id(election_id):
                 percent = (float(res['votes']) / float(d['votes_cast'])) * 100
                 res['percent'] = '%(percent).2f' % {'percent':percent}
                 d['results'].append(res)
-        resp.append(d)
+            if d:
+                resp['contests'].append(d)
+        if city_wide:
+            resp['registered_voters'] = max([r['registered_voters'] for r in resp['contests']])
+            resp['ballots_cast'] = max([r['ballots_cast'] for r in resp['contests']])
+        else:
+            resp['registered_voters'] = sum([r['registered_voters'] for r in resp['contests']])
+            resp['ballots_cast'] = sum([r['ballots_cast'] for r in resp['contests']])
     resp = make_response(json_util.dumps(resp))
     resp.headers['Content-Type'] = 'application/json'
     return resp
