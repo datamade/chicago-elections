@@ -1,4 +1,5 @@
 from flask import Flask, request, make_response
+from flask.ext.cache import Cache
 import pymongo
 from bson import json_util
 import json
@@ -7,6 +8,8 @@ from itertools import groupby
 from datetime import date, datetime
 
 app = Flask(__name__)
+cache = Cache(config={'CACHE_TYPE': 'simple'})
+cache.init_app(app)
 
 c = pymongo.MongoClient()
 db = c['openelex']
@@ -14,6 +17,7 @@ db = c['openelex']
 dhandler = lambda obj: obj.isoformat() if isinstance(obj, date) or isinstance(obj, datetime) else None
 
 @app.route('/elections/')
+@cache.cached(timeout=60*60*24)
 def elections():
     # Displays elections by ID and contests in each election
     contests = list(db['contest'].find())
@@ -27,6 +31,7 @@ def elections():
     return resp
 
 @app.route('/elections/<election_id>/')
+@cache.cached(timeout=60*60*24)
 def elections_by_id(election_id):
     # Returns a single election and the results of the contests
     # in that election by ward
